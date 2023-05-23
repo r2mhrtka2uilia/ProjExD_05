@@ -120,7 +120,7 @@ class Bird(pg.sprite.Sprite):
         return self.dire
     
 
-    
+
 
 class Bomb(pg.sprite.Sprite):
     """
@@ -190,12 +190,7 @@ class Beam(pg.sprite.Sprite):
 
 class Hp: #HPバー
     def __init__(self, x, y, width, max):
-        """
-        self.hp = pg.image.load("ex05/fig/hp.png")
-        self.hpb = pg.image.load("ex05/fig/hpb.png")
-        self.k_hp = 100
-        self.k_st = 0
-        """
+
         self.x = x
         self.y = y
         self.width = width
@@ -224,17 +219,17 @@ class Hp: #HPバー
 
         # effect_barの色を変える
         if self.effect_bar.width <= self.bar.width / 6:
-            self.effect_color = (255, 255, 0)
-        elif self.effect_bar.width <= self.bar.width / 2:
-            self.effect_color = (255, 255, 0)
-        else:
             self.effect_color = (0, 255, 0)
+        elif self.effect_bar.width <= self.bar.width / 2:
+            self.effect_color = (0, 255, 0)
+        else:
+            self.effect_color = (255, 0, 0)
 
     def draw(self, screen):
         pg.draw.rect(screen, (255, 255, 255), self.frame)
         pg.draw.rect(screen, (0, 0, 0), self.bar)
         pg.draw.rect(screen, self.effect_color, self.effect_bar)
-        pg.draw.rect(screen, (0, 0, 255), self.value)
+        pg.draw.rect(screen, (0, 255, 0), self.value)
         screen.blit(self.label, (self.x, self.y))
 
 
@@ -385,7 +380,7 @@ def main():
     score = Score()
 
     bird = Bird(3, (900, 400))
-    hp = Hp(10, 600, 100, 12)
+    hp = Hp(40, 800, 100, 4)
     bombs = pg.sprite.Group()
     beams = pg.sprite.Group()
     exps = pg.sprite.Group()
@@ -481,11 +476,7 @@ def main():
                 neo_beam = NeoBeam(bird, num_beams)
                 beams.add(*neo_beam.gen_beams())
             
-        """    
-        hp = Hp
-        screen.blit(hp.hpb,(10,450))
-        screen.blit(hp.hp,(10,450)) #hpバーの表示
-        """
+
         bird.update(key_lst, screen)
         hp.update()
         hp.draw(screen)
